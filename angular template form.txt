@@ -1,0 +1,180 @@
+app.module.ts
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import {FormsModule} from '@angular/forms';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+----------------------------------------------------------
+app.componet.ts
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'project';
+  model: any = {}
+  onSubmit() {
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.color) + JSON.stringify(this.model))
+  }
+  color = " ";
+  changecolor(color) {
+    this.color = color;
+  }
+}
+
+-------------------------------------------------------------------------------------
+
+app.componet.html
+<hr>
+<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" >
+        <fieldset>
+                <table [ngClass]="'nightmode'">
+
+                        <tr>
+                                <td>
+                                        <label> title </label><br>
+                                </td>
+                                <td>
+
+                                        <input type="radio" name="dhrumil" required value="MR"
+                                                [(ngModel)]="dhrumil.model" #dhrumil="ngModel">MR
+                                        <input type="radio" name="dhrumil" required value="MRS"
+                                                [(ngModel)]="dhrumil.model" #dhrumil="ngModel">MRS
+                                        <input type="radio" name="dhrumil" required value="MISS"
+                                                [(ngModel)]="dhrumil.model" #dhrumil="ngModel">MISS
+                                        <input type="radio" name="dhrumil" required value="DR"
+                                                [(ngModel)]="dhrumil.model" #dhrumil="ngModel">DR
+                                </td>
+                                <td>
+                                        <div *ngIf="f.submitted && dhrumil.invalid">
+                                                <h5 *ngIf="dhrumil.errors.required">
+                                                        title is required
+                                                </h5>
+                                        </div>
+                                </td>
+                        <tr>
+                                <td>
+                                        <label> First Name</label><br>
+                                </td>
+
+                                <td>
+                                        <input type="text" name="FirstName" [(ngModel)]="model.FirstName"
+                                                #FirstName="ngModel" required pattern="^[a-zA-Z]{4,10}$"><br>
+                                </td>
+                                <td>
+                                        <div *ngIf="f.submitted && FirstName.invalid">
+                                                <h5 *ngIf="FirstName.errors.required">
+                                                        First Name is required
+                                                </h5>
+                                                <h5 *ngIf="FirstName.errors.pattern">
+                                                        name must be valid
+                                                </h5>
+                                        </div>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td>
+                                        <label> Last Name</label><br>
+                                </td>
+                                <td>
+                                        <input type="text" name="LastName" [(ngModel)]="model.LastName"
+                                                #LastName="ngModel" required pattern="^[a-zA-Z]{10,20}$"><br>
+                                </td>
+                                <td>
+                                        <div *ngIf="f.submitted && LastName.invalid">
+                                                <h5 *ngIf="LastName.errors.required">
+                                                        last Name is required
+                                                </h5>
+                                                <h5 *ngIf="LastName.errors.pattern">
+                                                        name must be valid
+                                                </h5>
+                                        </div>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td>
+                                        <label> MobileNo</label><br>
+                                </td>
+                                <td>
+                                        <input type="text" name="MobileNo" [(ngModel)]="model.MobileNo"
+                                                #MobileNo="ngModel" required pattern="^[0-9]{10,15}$"><br>
+                                </td>
+                                <td>
+                                        <div *ngIf="f.submitted && MobileNo.invalid">
+                                                <h5 *ngIf="MobileNo.errors.required">
+                                                        Mobile No is required
+                                                </h5>
+                                                <h5 *ngIf="MobileNo.errors.pattern">
+                                                        Mobile No must be of 10 digit
+                                                </h5>
+                                        </div>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td>
+                                        <label> Password</label><br>
+                                </td>
+                                <td>
+                                        <input type="password" name="Password" [(ngModel)]="model.Password"
+                                                #Password="ngModel" required pattern="^[0-9]{6,10}$">
+                                </td><br>
+                                <td>
+                                        <div *ngIf="f.submitted && Password.invalid">
+                                                <h5 *ngIf="Password.errors.required">
+                                                        password is required
+                                                </h5>
+                                                <h5 *ngIf="Password.errors.pattern">
+                                                        password must be of length 6
+                                                </h5>
+                                        </div>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td>
+                                        <input type="radio" name="gender" required value="yes"
+                                                [(ngModel)]="gender.model" #gender="ngModel"> yes
+                                        <input type="radio" name="gender" required value="no" [(ngModel)]="gender.model"
+                                                #gender="ngModel"> no
+                                </td><br>
+                                <td>
+                                        <div *ngIf="f.submitted && gender.invalid">
+                                                <h5 *ngIf="gender.errors.required">
+                                                        select One
+                                                </h5>
+                                        </div>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td>
+                                        <button> register </button>
+                                </td>
+                                <td>
+                                        <button type="reset"> cancel</button>
+                                </td>
+                        </tr>
+                </table>
+        </fieldset>
+</form>
+
